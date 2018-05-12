@@ -1,0 +1,12 @@
+﻿{
+  "ConnectionStrings": {
+    "D1SoccerServiceContext": "your connection string"
+  },
+  "Logging": {
+    "IncludeScopes": false,
+    "LogLevel": {
+      "Default": "Warning"
+    }
+  }
+}
+
