@@ -1,5 +1,86 @@
-{{!-- The following component displays Ember's default welcome message. --}}
-{{welcome-page}}
-{{!-- Feel free to remove this! --}}
+<div class="header header-wrapper">
+	<div id="header-top" class="navbar">
+    <div class="container bs3container">
+        <ul class="social-icons medium round pull-right">
+          <li><a class="social-icon" href="http://www.facebook.com/D1Sports" target="_blank"><i class="fa fa-facebook"></i></a></li>
+          <li><a class="social-icon" href="http://www.twitter.com/D1Sports" target="_blank"><i class="fa fa-twitter"></i></a></li>
+          <li><a class="social-icon" href="http://instagram.com/D1Sports" target="_blank"><i class="fa fa-instagram"></i></a></li>
+          <li><a class="social-icon" href="https://www.pinterest.com/d1sportstrain/" target="_blank"><i class="fa fa-pinterest"></i></a></li>
+        </ul>
+        <div class="logo-primary">
+          <a href="/"><img src="/assets/images/logo-120x140.png" class="img-fluid" alt="D1SportsTraining.com"></a>
+        </div>
+    </div>
+  </div>
+
+  <!-- bottom header bar -->
+  <div id="header-bottom" class="navbar">
+    <div class="container bs3container">
+      <nav class="navbar navbar-expand-md full-width">
+        <!-- mobile menu button -->
+        <a class="navbar-brand"></a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#mainnav">
+            <span class="navbar-toggler-text">MENU</span>
+            <i class="fa fa-bars fa-2x">&zwnj;</i>
+        </button>
+
+        <!-- Navigation Dropdown Menu -->
+        <div class="navbar-collapse collapse navbar-mainnav" id="mainnav">
+          <ul class="nav navbar-nav">
+            {{#bs-dropdown tagName="li" as |dd|}}
+              {{#dd.toggle}}League <span class="caret"></span>{{/dd.toggle}}
+              {{#dd.menu as |menu|}}
+                {{#menu.item}}
+                  {{#menu.link-to 'rules' tagName="li"}}
+                    <a class="nav-link" href="#gen-rules" target="_top">Rules</a>
+                  {{/menu.link-to}}
+                {{/menu.item}}
+                {{#menu.item}}
+                  {{#menu.link-to 'news' tagName="li"}}
+                    <a class="nav-link" href="#" target="_top">News</a>
+                  {{/menu.link-to}}
+                {{/menu.item}}
+                {{#menu.item}}
+                  {{#menu.link-to 'schedule' tagName="li"}}
+                    <a class="nav-link" href="#" target="_top">Schedule</a>
+                  {{/menu.link-to}}
+                {{/menu.item}}
+                {{#menu.item}}
+                  {{#menu.link-to 'standings' tagName="li"}}
+                    <a class="nav-link" href="#" target="_top">Standings</a>
+                  {{/menu.link-to}}
+                {{/menu.item}}
+              {{/dd.menu}}
+            {{/bs-dropdown}}
+
+            {{#link-to 'album' tagName="li"}}
+                <a class="nav-link" href="#" target="_top">Photos</a>
+            {{/link-to}}
+            {{#link-to 'contact' tagName="li"}}
+                <a class="nav-link" href="#" target="_top">Contact</a>
+            {{/link-to}}
+          </ul>
+          <ul class="nav navbar-nav navbar-right" style="margin-left: -15px;">
+              {{!-- {{#if session.isAuthenticated}}
+                {{#link-to 'secure.dashboard' tagName="li"}}
+                    <a class="nav-link" href="/secure/dashboard" target="_top">Dashboard</a>
+                {{/link-to}}
+              {{/if}}
+              {{auth/login-button}} --}}
+          </ul>
+        </div>
+      </nav>
+    </div>
+  </div>
+</div>
+
+{{!-- {{#if session.isAuthenticated}}
+{{else}}
+  {{auth/login-modal}}
+{{/if}} --}}
 
 {{outlet}}
+
+<div class="footer footer-legal">
+  ©2017 | D1 is a registered trademark of D1 Sports Holdings, LLC.
+</div>

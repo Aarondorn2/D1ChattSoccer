@@ -7,6 +7,13 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.route('league');
+  this.route('rules');
+  this.route('news');
+  this.route('schedule');
+  this.route('standings');
+  this.route('album');
+  this.route('contact');
 });
 
 export default Router;

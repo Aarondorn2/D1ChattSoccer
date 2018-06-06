@@ -15,6 +15,9 @@ module.exports = {
     browser: true
   },
   rules: {
+    'arrow-parens': 0,
+    'ember/no-capital-letters-in-routes': 0,
+    'ember/routes-segments-snake-case': 0
   },
   overrides: [
     // node files

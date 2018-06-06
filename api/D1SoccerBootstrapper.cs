@@ -1,5 +1,7 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using D1SoccerApi;
+using Microsoft.Extensions.Configuration;
 using Nancy;
+using Nancy.Authentication.Stateless;
 using Nancy.Bootstrapper;
 using Nancy.TinyIoc;
 using System.IO;
@@ -21,6 +23,9 @@ namespace D1SoccerService {
         }
         protected override void ApplicationStartup(TinyIoCContainer container, IPipelines pipelines) {
             base.ApplicationStartup(container, pipelines);
+
+            StatelessAuthentication.Enable(pipelines, Security.GetAuthConfig(Configuration["Secrets:JWT"]));
+            
             pipelines.AfterRequest += ctx => {
                 ctx.Response.Headers.Add("Access-Control-Allow-Origin", "*");
                 ctx.Response.Headers.Add("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, Authorization, x-token, x-appid");

@@ -50,6 +50,9 @@ namespace D1SoccerService.Entities {
         [JsonProperty("email")]
         public string Email { get; set; }
 
+        [JsonProperty("isEmailVerified")]
+        public bool IsEmailVerified { get; set; }
+
         [JsonProperty("systemLoadDate")]
         public DateTime SystemLoadDate { get; set; }
 

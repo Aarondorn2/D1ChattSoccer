@@ -1,0 +1,50 @@
+.homepage {
+  .subheader {
+    text-align: center;
+    margin-top: 375px;
+    margin-left: 45%;
+    height: 180px;
+  }
+  .subheader h2 {
+    text-shadow: none;
+    font-weight: 400;
+    color: #c4c3bf;
+    font-size: 34px;
+    position: fixed;
+    z-index: -1;
+  }
+
+  .section {
+    background-color: #eeedf1;
+    text-align:center;
+    padding: 25px;
+  }
+  .inner-section {
+    text-align: left;
+    min-height: 200px;
+    max-width: 800px;
+    margin-left: 6%;
+    margin-right: 6%;
+  }
+  .section-transparent-85 {
+    opacity: 0.85;
+  }
+  .section-transparent-95 {
+    opacity: 0.95;
+  }
+
+  .ball-bg {
+    background: url('/assets/images/SoccerBallOutline.png') no-repeat center;
+    -webkit-background-size: auto;
+    -moz-background-size: auto;
+    -o-background-size: auto;
+    background-size: auto;
+    min-height: 500px;
+  }
+
+  @media (max-width: 768px) {
+    .subheader {
+      margin-left: 0px;
+    }
+  }
+}

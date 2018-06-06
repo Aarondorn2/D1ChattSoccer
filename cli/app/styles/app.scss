@@ -1,2 +1,147 @@
 
 @import "ember-bootstrap/bootstrap";
+@import 'd1site';
+@import 'index';
+
+//BS3->BS4 fixes
+.navbar .bs3container {
+  display: block;
+  
+  li {
+    margin-top: 0;
+  }
+}
+
+#header-bottom {
+  .navbar-toggler {
+    float: right;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    color: #5a5a5a;
+    font-size: 16px;
+  }
+  .navbar-toggler-text {
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .dropdown-toggle {
+    height: 47px;
+    display: block;
+  }
+  .dropdown-item {
+    &:hover {
+      background-color: #e51937;
+      a {
+        color: #ffffff;
+        text-shadow: none;
+      }
+    }
+    &.active {
+      background-color: transparent;
+      &:hover {
+        background-color: #e51937;
+      }
+    }
+  }
+}
+.logo-primary {
+  margin-top: -10px;
+}
+.footer-legal {
+    color: #999999;
+    padding: 20px 0 20px 0;
+    background: url('/assets/images/bg-copyright.jpg') no-repeat center top;
+    background-size: cover;
+    padding-left: 10%;
+}
+
+
+// global styles
+.full-width {
+  width: 100%;
+}
+
+// page elements
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+body {
+background-color: transparent; //clear styling from other CSS files
+}
+.main-bg {
+background: url('/assets/images/d1field.jpg') no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+.page-bg {
+background: url('/assets/images/bg-maincontent.jpg') no-repeat center center fixed;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+background-size: cover;
+}
+.dark-bg {
+background: #000 url('/assets/images/bg-blackpaper.png') repeat scroll 0 0;
+-webkit-background-size: auto;
+-moz-background-size: auto;
+-o-background-size: auto;
+background-size: auto;
+}
+.content-container {
+padding: 40px 30px 30px 30px;
+min-height: calc(100vh - 160px); //160px is header+footer height.  This ensures footer is always on bottom!
+}
+.secure-wrapper {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+}
+.secure-content {
+  width: 100%;
+}
+.center-container {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
+.shadow {
+  background: url('/assets/images/shadow.png') left bottom no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  width: 100%;
+  padding-bottom: 40px;
+  margin: 0 auto;
+}
+.shadow-top {
+    -webkit-transform:rotate(180deg);
+    -moz-transform:rotate(180deg);
+    -o-transform:rotate(180deg);
+    -ms-transform:rotate(180deg);
+    transform:rotate(180deg);
+}
+
+@media (max-width: 768px) {
+  .shadow {
+    padding-bottom: 20px;
+  }
+}
+@media (max-width : 480px) {
+  .shadow {
+    padding-bottom: 10px;
+  }
+}
+
+
+// ??
+.jumbotron {
+  text-align: center;
+  }
+  .ember-cli-g-map {
+  height: 400px;
+  }

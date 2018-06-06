@@ -1,10 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
+using System.IO;
 
 namespace D1SoccerService.Entities {
-    public partial class D1SoccerServiceContext : DbContext {
+    public partial class D1SoccerApiContext : DbContext {
         readonly IConfiguration Configuration;
-        public D1SoccerServiceContext(IConfiguration config) {
+        public D1SoccerApiContext(IConfiguration config) {
             Configuration = config;
         }
 
@@ -255,6 +257,10 @@ namespace D1SoccerService.Entities {
                     .HasColumnName("email")
                     .HasMaxLength(255);
 
+                entity.Property(e => e.IsEmailVerified)
+                    .HasColumnName("is_email_verified")
+                    .HasColumnType("tinyint(1)");
+
                 entity.Property(e => e.EmergencyContact)
                     .IsRequired()
                     .HasColumnName("emergency_contact")
@@ -425,6 +431,21 @@ namespace D1SoccerService.Entities {
                     .HasForeignKey(d => d.ContractId)
                     .HasConstraintName("FK_B364E1BE2576E0FD");
             });
+        }
+    }
+
+    public class D1SoccerApiContextFactory : IDesignTimeDbContextFactory<D1SoccerApiContext> {
+        public D1SoccerApiContext CreateDbContext(string[] args) {
+            //var optionsBuilder = new DbContextOptionsBuilder<D1SoccerApiContext>();
+            //optionsBuilder.UseSqlite("Data Source=blog.db");
+
+            var config = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json")
+                .AddEnvironmentVariables()
+                .Build();
+
+            return new D1SoccerApiContext(config);
         }
     }
 }

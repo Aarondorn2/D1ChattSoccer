@@ -11,9 +11,10 @@ using System;
 namespace D1SoccerService.Migrations
 {
     [DbContext(typeof(D1SoccerApiContext))]
-    partial class D1SoccerServiceContextModelSnapshot : ModelSnapshot
+    [Migration("20180520010517_useremailerified")]
+    partial class useremailerified
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

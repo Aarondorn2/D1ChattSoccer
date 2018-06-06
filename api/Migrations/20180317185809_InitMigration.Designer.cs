@@ -10,7 +10,7 @@ using System;
 
 namespace D1SoccerService.Migrations
 {
-    [DbContext(typeof(D1SoccerServiceContext))]
+    [DbContext(typeof(D1SoccerApiContext))]
     [Migration("20180317185809_InitMigration")]
     partial class InitMigration
     {

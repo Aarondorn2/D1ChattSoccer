@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'qs',
+    modulePrefix: 'D1ChattSoccer',
     environment,
     rootURL: '/',
     locationType: 'auto',
