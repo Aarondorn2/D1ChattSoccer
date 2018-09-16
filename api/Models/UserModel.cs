@@ -1,10 +1,10 @@
-﻿using D1SoccerService.Entities;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using D1SoccerApi.Entities;
 
-namespace D1SoccerService.Models {
-    public class User {
+namespace D1SoccerApi.Models {
+    public class UserModel {
 
         [JsonIgnore]
         public string Id { get; set; }
@@ -56,6 +56,6 @@ namespace D1SoccerService.Models {
 
 
         [JsonProperty("userSeasons")]
-        public ICollection<UserSeasons> UserSeasons { get; set; }
+        public List<UserSeason> UserSeasons { get; set; }
     }
 }

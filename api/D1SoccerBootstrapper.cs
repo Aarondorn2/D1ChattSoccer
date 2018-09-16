@@ -1,12 +1,11 @@
-﻿using D1SoccerApi;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Nancy;
 using Nancy.Authentication.Stateless;
 using Nancy.Bootstrapper;
 using Nancy.TinyIoc;
 using System.IO;
 
-namespace D1SoccerService {
+namespace D1SoccerApi {
     public class D1SoccerBootstrapper : DefaultNancyBootstrapper {
         readonly IConfiguration Configuration;
         public D1SoccerBootstrapper() {

@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Nancy.Owin;
 
-namespace D1SoccerService {
+namespace D1SoccerApi {
     public class Startup {
         private readonly IConfiguration config;
         public Startup(IHostingEnvironment env) {

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 
-namespace D1SoccerService {
+namespace D1SoccerApi {
     public class Program {
         public static IConfiguration Configuration { get; set; }
 

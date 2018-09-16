@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Text;
 
-namespace D1SoccerService {
+namespace D1SoccerApi {
     public static class JsonApi {
         public static Response Response(dynamic model) {
             return Response(new[] { model });

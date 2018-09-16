@@ -1,7 +1,7 @@
-﻿using D1SoccerService.Entities;
-using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Extensions.Configuration;
 using Nancy;
 using System.Linq;
+using D1SoccerApi.Entities;
 
 namespace D1SoccerApi.Modules {
     public class AuthModule : NancyModule {
@@ -21,7 +21,7 @@ namespace D1SoccerApi.Modules {
                 Email = x.Email,
                 Id = x.Id.ToString(),
                 FirstName = x.FirstName,
-                UserType = x.UserType,
+                UserType = x.UserType.ToString(),
                 IsVerified = x.IsEmailVerified,
                 IsRegistered = true
             }).FirstOrDefault() ?? new JwtIdentity {

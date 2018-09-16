@@ -1,11 +1,10 @@
-﻿using D1SoccerApi;
-using D1SoccerService.Entities;
-using D1SoccerService.Models;
-using Nancy;
+﻿using Nancy;
 using Nancy.Security;
 using System.Linq;
+using D1SoccerApi.Entities;
+using D1SoccerApi.Models;
 
-namespace D1SoccerService.Modules {
+namespace D1SoccerApi.Modules {
     public class TestModule : NancyModule {
         public TestModule(D1SoccerApiContext ctx) : base("api") {
             this.RequiresAuthentication();
@@ -13,14 +12,12 @@ namespace D1SoccerService.Modules {
             Get("/", _ => {
                 return "hello world";
             });
-            Get("/db", _ => {
+            base.Get("/db", _ => {
                 return JsonApi.Response(ctx.Users
-                    .Select(x => new User {
+                    .Select(x => new UserModel {
                         Id = x.Id.ToString(),
                         FirstName = x.FirstName,
-                        LastName = x.LastName,
-                        Dob = x.Dob,
-                        Gender = x.Gender
+                        LastName = x.LastName
                     })
                     .ToArray());
             });
