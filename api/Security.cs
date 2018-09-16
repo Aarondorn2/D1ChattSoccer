@@ -4,6 +4,7 @@ using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using D1SoccerApi.Entities;
 
 namespace D1SoccerApi {
     public static class Security {
@@ -20,13 +21,13 @@ namespace D1SoccerApi {
                 new Claim("id", identity.Id),
                 new Claim("user", identity.Email),
                 new Claim("fname", identity.FirstName),
-                new Claim("utype", identity.UserType)
+                new Claim("utype", ((int)identity.UserType).ToString())
             };
             
             var token = new JwtSecurityToken(
-                issuer: issuer,
-                audience: audience,
-                claims: claims,
+                issuer,
+                audience,
+                claims,
                 expires: DateTime.Now.AddDays(1),
                 signingCredentials: creds
             );
@@ -71,7 +72,7 @@ namespace D1SoccerApi {
             Id = FindFirst("id")?.Value;
             Email = FindFirst("user")?.Value;
             FirstName = FindFirst("fname")?.Value;
-            UserType = FindFirst("utype")?.Value;
+            UserType = int.TryParse(FindFirst("utype")?.Value, out var utype) ? (UserType)utype : UserType.Player;
             IsRegistered = bool.TryParse(FindFirst("regd")?.Value, out var isRegistered) ? isRegistered : false;
             IsVerified = bool.TryParse(FindFirst("vrfd")?.Value, out var isVerified) ? isVerified : false;
         }
@@ -79,7 +80,7 @@ namespace D1SoccerApi {
         public string Id { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
-        public string UserType { get; set; }
+        public UserType UserType { get; set; }
         public bool IsRegistered { get; set; }
         public bool IsVerified { get; set; }
     }
