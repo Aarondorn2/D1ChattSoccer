@@ -12,7 +12,6 @@ export default Controller.extend({
     $(window).scroll(() => {
 
       let scrollTop = $(window).scrollTop();
-      // console.log(scrollTop);
       if(scrollTop >= 200) {
         $(".floating-text h2").hide();
       } else {

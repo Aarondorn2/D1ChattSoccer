@@ -1,0 +1,24 @@
+{{#content-container}}
+  {{#photo-swipe items=model history=false as |photoswipe|}}
+    <div class="row">
+      {{#each model as |item index|}}
+        {{#if index}}
+          <div class="col-lg-4 col-md-6 col-sm-12 top-5">
+            <div class="img-thumbnail">              
+              <img class="img-fluid" src={{item.src}} {{action photoswipe.actions.open (hash index=index)}} />
+
+              {{#if (or item.title item.description)}}
+                <div class="caption text-center">
+                  <h3>{{item.title}}</h3>
+                  {{#if item.description}}
+                    <p>{{item.description}}</p>
+                  {{/if}}
+                </div>
+              {{/if}}
+            </div>
+          </div>
+        {{/if}}
+      {{/each}}
+    </div>
+  {{/photo-swipe}}
+{{/content-container}}

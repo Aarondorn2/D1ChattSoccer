@@ -14,7 +14,7 @@ Router.map(function() {
   });
 
   this.route('about');
-  this.route('album');
+  this.route('photos');
   this.route('contact');
   this.route('rules');
   this.route('schedule');

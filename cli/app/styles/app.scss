@@ -1,7 +1,9 @@
 //variables
 $d1-red: #d21034;
+$d1-red-darker: #851a24;
 $d1-white: white;
 $d1-grey: #929497;
+$d1-grey-lighter: #d0cfd2;
 $d1-grey-lightest: #eeedf1;
 
 $bs-sm: 576px;
@@ -11,9 +13,11 @@ $bs-xl: 1200px;
 
 //imports
 @import "ember-bootstrap/bootstrap";
+@import "ember-photoswipe";
 @import 'index';
 @import 'header-footer';
 @import 'login';
+@import 'components/contact-card';
 
 //fonts
 @font-face {
@@ -49,9 +53,25 @@ html, body {
 }
 body {
   background-color: transparent; //clear styling from other CSS files
+  color: #5a5a5a;
+  font-size: 16px;
+  font-family: sans-serif;
+  -webkit-text-stroke: 1px transparent;
 }
 a {
   color: $d1-red;
+}
+h1, h2, h3, .h1, .h2, .h3 {  
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+h4, h5, h6, .h4, .h5, .h6 {  
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+h6, .h6 {
+  font-size: 12px;
 }
 .main-bg {
   background: url('/assets/images/d1field.jpg') no-repeat center center fixed;
@@ -75,8 +95,18 @@ a {
   background-size: auto;
 }
 .content-container {
-  padding: 40px 30px 30px 30px;
-  min-height: calc(100vh - 160px); //160px is header+footer height.  This ensures footer is always on bottom!
+  padding: 0 30px;
+  padding-top: 40px;
+  min-height: calc(100vh - 211px); //ensures footer is always on bottom
+
+  
+  @media (max-width: 1280px) { //header is now 2 rows
+    min-height: calc(100vh - 268px);
+
+    @media (max-width: $bs-md) { // back to 1 (smaller) row
+      min-height: calc(100vh - 203px);
+    }
+  }
 }
 .secure-wrapper {
     display: flex;
@@ -103,6 +133,14 @@ a {
 }
 .full-width {
   width: 100%;
+}
+.nowrap {
+  white-space: nowrap; 
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.top-5 {
+  padding-top: 5px;
 }
 
 //?
