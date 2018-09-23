@@ -1,69 +1,43 @@
 <div class="homepage">
-  <div class="section-subheader">
-    <div class="subheader">
-      <h2>Sunday Adult Soccer League</h2>
+  <div class="floating-text">
+    <h2>Sunday Adult Soccer League</h2>
+  </div>
+
+  <div class="section shadow-top shadow-bottom">
+    <div class="content">
+      <h2 class="text-center">Welcome to D1 Soccer!</h2>
+      <br/>
+      <p>
+        If you're looking to register for a season, you should <a {{action "showLoginModal"}} href="#" target="_top">sign in</a>.  You'll be able
+        to sign a waiver, pay for a season, and join a team!
+      </p>
+      <br>
+      <p>
+        D1 Chattanooga offers a Sunday Adult Soccer League.  This is a coed league
+        for soccer players 18 years or older.  Seasons generally consist of 8 games
+        plus a trounament and run year-round.
+      </p>
+      <p>
+        Games are played on an artifical-grass indoor field with out-of-bounds
+        lines.  Teams can field up to 6 players, including a goalkeeper.  Games consist
+        of two 25 minute halves.  For more information, you can check out our
+        {{#link-to 'rules'}}<a href="#">rules page</a>{{/link-to}}.
+      </p>
+      <p>
+        Feel free to {{#link-to 'contact'}}<a href="#">contact us</a>{{/link-to}}
+        if you have questions or would like to know more about the league!
+      </p>
     </div>
   </div>
 
-  <div class="shadow shadow-top" />
-  <div class="row section section-transparent-95">
-      <div class="col-md-12" style="height:100%">
-        <div class="inner-section">
-          <h2>
-            Welcome to D1 Soccer!
-          </h2>
-          <br/>
-          <p>
-            If you're looking to register for a season, you should <a {{action "showLoginModal"}} href="#" target="_top">sign in</a>.  You'll be able
-            to sign a waiver, pay for a season, and join a team!
-          </p>
-          <p>
-            We're new to this WWW thing.. Please bare with us as we add new features and fix bugs.
-            In the mean time, here's a random soccer ball decal to wow and confuse you:
-          </p>
-        </div>
-      </div>
-      {{!-- <div class="col-md-6">
-        <img src="assets/images/uc2.png" style="max-width:100%;" />
-      </div> --}}
+  <div class="text-center">
+    <div class="oswald upper">Sponsors</div>
+    <div class="clearfix"></div>
+    <div>
+      <a href="https://www.suntancity.com/tan-salon-locations/tennessee-chattanooga-tn-chattanooga-hamilton-place/" rel="noopener" target="_blank">
+        <img src="/assets/images/sponsor-logo-stc.png" alt="Sun Tan City">
+      </a>
+    </div>
   </div>
-  <div class="shadow shadow-bottom" />
 
-  <div class="row section ball-bg" />
-
-  <div class="shadow shadow-top" />
-  <div class="row section section-transparent-95">
-      <div class="col-md-12" style="height:100%">
-        <div class="inner-section">
-          <h2>
-            About Us
-          </h2>
-          <br/>
-          <p>
-            D1 Chattanooga offers a Sunday Adult Soccer League.  This is a coed league
-            for soccer players 18 years or older.  Seasons generally consist of 8 games
-            plus a trounament and run year-round.
-          </p>
-          <p>
-            Games are played on an artifical-grass indoor field with out-of-bounds
-            lines.  Teams can field up to 6 players, including a goalkeeper.  Games consist
-            of two 25 minute halves.  For more information, you can check out our
-              {{#link-to 'rules'}}
-                <a href="#">rules page</a>.
-              {{/link-to}}
-          </p>
-          <p>
-            Feel free to
-              {{#link-to 'contact'}}
-                <a href="#">contact us</a>
-              {{/link-to}}
-            if you have questions or would like to know more about the league!
-          </p>
-        </div>
-      </div>
-      {{!-- <div class="col-md-6">
-        <img src="assets/images/uc2.png" style="max-width:100%;" />
-      </div> --}}
-  </div>
-  <div class="shadow shadow-bottom" />
 </div>

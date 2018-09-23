@@ -14,15 +14,15 @@ export default Controller.extend({
       let scrollTop = $(window).scrollTop();
       // console.log(scrollTop);
       if(scrollTop >= 200) {
-        $(".subheader h2").hide();
+        $(".floating-text h2").hide();
       } else {
-        $(".subheader h2").show();
+        $(".floating-text h2").show();
 
         if(scrollTop >= 100) {
           let op = 1 - ((scrollTop - 100) / 100);
-          $(".subheader h2").css("opacity", op );
+          $(".floating-text h2").css("opacity", op );
         } else {
-          $(".subheader h2").css("opacity", 1 );
+          $(".floating-text h2").css("opacity", 1 );
         }
       }
 

@@ -1,0 +1,70 @@
+
+.header {
+  .logo-main {
+    position: absolute;
+    top: 25px;
+    left: 70px;
+    z-index: 999;
+
+    img {
+      height: 113px;
+    }
+
+    @media (max-width: $bs-md) {
+      top: 5px;
+      left: 5px;
+
+      img {
+        height: 85px;
+      }
+    }
+  }
+
+  .navbar-topper {
+    background-color: rgba(0, 0, 0, 0.6);
+    border: none;
+    padding-right: 45px;
+    padding-top: 15px;
+    height: 45px;
+    font-size: 17px;
+
+    a {
+      color: $d1-grey-lightest;
+
+      &:hover {
+        color: $d1-red;
+      }
+    }
+  }
+
+  .navbar {
+    background-color: rgba(0, 0, 0, 0.9);
+    font-size: 21px;
+    letter-spacing: 2px;
+  
+    .navbar-toggler {      
+      background-color: $d1-red;
+      color: $d1-white;
+    }
+    
+    li {
+      padding: 5px 15px;
+
+      &:hover {
+        background-color: $d1-red;
+      }
+    }    
+
+    @media (min-width: $bs-md) {
+      padding-left: 220px;
+    }
+  }
+}
+
+.footer-legal {
+  color: $d1-grey;    
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: 10px;
+  text-align: center;
+}

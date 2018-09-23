@@ -1,78 +1,56 @@
-<div class="header header-wrapper">
-	<div id="header-top" class="navbar">
-    <div class="container bs3container">
-        <ul class="social-icons medium round pull-right">
-          <li><a class="social-icon" href="http://www.facebook.com/D1Sports" target="_blank"><i class="fa fa-facebook"></i></a></li>
-          <li><a class="social-icon" href="http://www.twitter.com/D1Sports" target="_blank"><i class="fa fa-twitter"></i></a></li>
-          <li><a class="social-icon" href="http://instagram.com/D1Sports" target="_blank"><i class="fa fa-instagram"></i></a></li>
-          <li><a class="social-icon" href="https://www.pinterest.com/d1sportstrain/" target="_blank"><i class="fa fa-pinterest"></i></a></li>
-        </ul>
-        <div class="logo-primary">
-          <a href="/"><img src="/assets/images/logo-120x140.png" class="img-fluid" alt="D1SportsTraining.com"></a>
-        </div>
+<header class="header oswald upper">
+
+  <a class="logo-main" href="/">
+    <img src="/assets/images/logo-2018.png" alt="D1ChattSoccer">
+  </a>
+	
+  <div class="navbar-topper">
+    <div class="pull-right">
+      <a title="D1 Training - Chattanooga" href="https://d1training.com/chattanooga/" rel="noopener" target="_blank">
+        D1 Training
+        <i class="fa fa-external-link">&zwnj;</i>
+      </a>
     </div>
   </div>
 
-  <!-- bottom header bar -->
-  <div id="header-bottom" class="navbar">
-    <div class="container bs3container">
-      <nav class="navbar navbar-expand-md full-width">
-        <!-- mobile menu button -->
-        <a class="navbar-brand"></a>
-        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#mainnav">
-            <span class="navbar-toggler-text">MENU</span>
-            <i class="fa fa-bars fa-2x">&zwnj;</i>
-        </button>
+  <nav class="navbar navbar-expand-md">
+    <button class="navbar-toggler ml-auto" type="button" {{action "toggleShowMenu"}}>
+      <i class="fa fa-bars fa-2x">&zwnj;</i>
+    </button>
 
-        <!-- Navigation Dropdown Menu -->
-        <div class="navbar-collapse collapse navbar-mainnav" id="mainnav">
-          <ul class="nav navbar-nav">
-            {{#bs-dropdown tagName="li" as |dd|}}
-              {{#dd.toggle}}League <span class="caret"></span>{{/dd.toggle}}
-              {{#dd.menu as |menu|}}
-                {{#menu.item}}
-                  {{#menu.link-to 'rules' tagName="li"}}
-                    <a class="nav-link" href="#gen-rules" target="_top">Rules</a>
-                  {{/menu.link-to}}
-                {{/menu.item}}
-                {{#menu.item}}
-                  {{#menu.link-to 'news' tagName="li"}}
-                    <a class="nav-link" href="#" target="_top">News</a>
-                  {{/menu.link-to}}
-                {{/menu.item}}
-                {{#menu.item}}
-                  {{#menu.link-to 'schedule' tagName="li"}}
-                    <a class="nav-link" href="#" target="_top">Schedule</a>
-                  {{/menu.link-to}}
-                {{/menu.item}}
-                {{#menu.item}}
-                  {{#menu.link-to 'standings' tagName="li"}}
-                    <a class="nav-link" href="#" target="_top">Standings</a>
-                  {{/menu.link-to}}
-                {{/menu.item}}
-              {{/dd.menu}}
-            {{/bs-dropdown}}
-
-            {{#link-to 'album' tagName="li"}}
-                <a class="nav-link" href="#" target="_top">Photos</a>
-            {{/link-to}}
-            {{#link-to 'contact' tagName="li"}}
-                <a class="nav-link" href="#" target="_top">Contact</a>
-            {{/link-to}}
-          </ul>
-          <ul class="nav navbar-nav navbar-right" style="margin-left: -15px;">
-              {{!-- {{#if session.isAuthenticated}}
-                {{#link-to 'secure.dashboard' tagName="li"}}
-                    <a class="nav-link" href="/secure/dashboard" target="_top">Dashboard</a>
-                {{/link-to}}
-              {{/if}}
-              {{auth/login-button}} --}}
-          </ul>
-        </div>
-      </nav>
+    <div class="collapse navbar-collapse {{if showMenu 'show'}}" id="menu">
+      <ul class="nav navbar-nav ml-auto" {{action "toggleShowMenu" false}}>
+        {{#link-to 'about' tagName="li"}}
+            <a class="nav-link" href="#" target="_top">About</a>
+        {{/link-to}}
+        {{#link-to 'contact' tagName="li"}}
+            <a class="nav-link" href="#" target="_top">Contact</a>
+        {{/link-to}}
+        {{#link-to 'album' tagName="li"}}
+            <a class="nav-link" href="#" target="_top">Photos</a>
+        {{/link-to}}
+        {{#link-to 'rules' tagName="li"}}
+            <a class="nav-link" href="#" target="_top">League Rules</a>
+        {{/link-to}}
+        {{#link-to 'standings' tagName="li"}}
+            <a class="nav-link" href="#" target="_top">Standings</a>
+        {{/link-to}}
+        {{#link-to 'schedule' tagName="li"}}
+            <a class="nav-link" href="#" target="_top">Schedule</a>
+        {{/link-to}}
+        
+        <input type="button" class="btn btn-login oswald upper" value="Sign Up / Log In">
+        
+        {{!-- {{#if session.isAuthenticated}}
+          {{#link-to 'secure.dashboard' tagName="li"}}
+              <a class="nav-link" href="/secure/dashboard" target="_top">Dashboard</a>
+          {{/link-to}}
+        {{/if}}
+        {{auth/login-button}} --}}
+      </ul>
     </div>
-  </div>
-</div>
+  </nav>
+</header>
 
 {{!-- {{#if session.isAuthenticated}}
 {{else}}
@@ -81,6 +59,6 @@
 
 {{outlet}}
 
-<div class="footer footer-legal">
-  ©2017 | D1 is a registered trademark of D1 Sports Holdings, LLC.
+<div class="footer footer-legal shadow-top">
+  © 2018 D1 Sports Franchise, LLC. D1 is a registered trademark of D1 Sports Parent, LLC.
 </div>

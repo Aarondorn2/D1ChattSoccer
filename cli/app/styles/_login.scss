@@ -1,0 +1,11 @@
+.btn-login {
+  border: 2px solid $d1-grey;
+  background: $d1-red;
+  border-radius: 7px;
+  margin: 5px 15px;
+
+  &:hover {
+    transform: scale(1.07);
+    transition: ease .3s;
+  }
+}
