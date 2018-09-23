@@ -2,6 +2,7 @@
 $d1-red: #d21034;
 $d1-red-darker: #851a24;
 $d1-white: white;
+$d1-grey-darker: #797d7d;
 $d1-grey: #929497;
 $d1-grey-lighter: #d0cfd2;
 $d1-grey-lightest: #eeedf1;
@@ -10,6 +11,7 @@ $bs-sm: 576px;
 $bs-md: 768px;
 $bs-lg: 992px;
 $bs-xl: 1200px;
+$header-split: 1280px; //header is now 2 rows
 
 //imports
 @import "ember-bootstrap/bootstrap";
@@ -100,10 +102,10 @@ h6, .h6 {
   min-height: calc(100vh - 211px); //ensures footer is always on bottom
 
   
-  @media (max-width: 1280px) { //header is now 2 rows
+  @media (max-width: $header-split) {
     min-height: calc(100vh - 268px);
 
-    @media (max-width: $bs-md) { // back to 1 (smaller) row
+    @media (max-width: $bs-md) {
       min-height: calc(100vh - 203px);
     }
   }

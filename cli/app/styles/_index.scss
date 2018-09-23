@@ -1,15 +1,25 @@
 .homepage {
   .floating-text {
-    margin-top: 375px;
-    margin-left: 45%;
-    height: 140px;
+    margin-top: 330px;
+    height: 160px;
+    margin-left: 50%;
 
     h2 {
       font-weight: 400;
-      color: $d1-grey;
+      color: $d1-grey-darker;
       font-size: 34px;
       position: fixed;
       z-index: -1;
+    }
+    
+    @media (max-width: $header-split) {
+      margin-top: 245px;
+      height: 180px;
+
+      @media (max-width: $bs-md) {
+        margin-top: 285px;
+        height: 200px;
+      }
     }
   }
 
