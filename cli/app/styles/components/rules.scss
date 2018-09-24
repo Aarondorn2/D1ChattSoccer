@@ -1,0 +1,12 @@
+.rules {
+  padding: 0 80px;
+
+  .section-subgroup {
+    padding-top: 10px;
+    padding-left: 20px;
+  }
+  
+  @media (max-width: $bs-md) {
+    padding: 0;
+  }
+}
