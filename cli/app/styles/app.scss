@@ -2,6 +2,7 @@
 $d1-red: #d21034;
 $d1-red-darker: #851a24;
 $d1-white: white;
+$d1-grey-darkest: #61626f;
 $d1-grey-darker: #797d7d;
 $d1-grey: #929497;
 $d1-grey-lighter: #d0cfd2;
@@ -21,6 +22,7 @@ $header-split: 1280px; //header is now 2 rows
 @import 'login';
 @import 'components/contact-card';
 @import 'components/rules';
+@import 'components/auth/login-modal';
 
 //fonts
 @font-face {

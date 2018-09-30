@@ -1,0 +1,35 @@
+.login-modal {
+  
+  .login-icons a {
+    font-size: 1.5em;
+    padding: 3% 3%;
+
+    &:hover {
+      color: $d1-grey-darkest;
+      text-decoration: none;
+    }
+  }
+
+  .login-email, .reset-password {
+    max-width: 300px;
+    margin: auto;
+  }
+
+  .login-email .input-group-addon, .reset-password .input-group-addon {
+    // color: #0078b3;
+    color: #e51937;
+  }
+
+  .login-error {
+    color: red;
+    text-align: center;
+    font-size: .8em;
+  }
+  .login-spinner {
+    text-align: center;
+  }
+
+  .reset-password .alert-message {
+    width: 100%;
+  }
+}

@@ -39,23 +39,23 @@
             <a class="nav-link" href="#" target="_top">Schedule</a>
         {{/link-to}}
         
-        <input type="button" class="btn btn-login oswald upper" value="Sign Up / Log In">
+        <input type="button" class="btn btn-login oswald upper" value="Sign Up / Log In" {{action "toggleShowLogin"}}>
         
         {{!-- {{#if session.isAuthenticated}}
           {{#link-to 'secure.dashboard' tagName="li"}}
               <a class="nav-link" href="/secure/dashboard" target="_top">Dashboard</a>
           {{/link-to}}
-        {{/if}}
-        {{auth/login-button}} --}}
+        {{/if}} --}}
       </ul>
     </div>
   </nav>
 </header>
 
-{{!-- {{#if session.isAuthenticated}}
-{{else}}
-  {{auth/login-modal}}
-{{/if}} --}}
+{{#unless session.isAuthenticated}}
+  {{#if showLogin}}
+    {{auth/login-modal class="login-modal" dismiss=(action "toggleShowLogin")}}
+  {{/if}}
+{{/unless}}
 
 {{outlet}}
 
