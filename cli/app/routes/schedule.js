@@ -5,14 +5,12 @@ export default Route.extend({
     imgur: service(),
 
     model() {
-      return this.imgur.getAlbum()
+      return this.imgur.getAlbum('zz4FIAr')
         .then(x => x.data.map(y => {
           return {
             src: y.link,
             w: y.width,
-            h: y.height,
-            title: y.title,
-            description: y.description
+            h: y.height
           };
         }));
     }
