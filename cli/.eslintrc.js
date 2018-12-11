@@ -16,8 +16,12 @@ module.exports = {
   },
   rules: {
     'arrow-parens': 0,
+    'ember/no-attrs-in-components': 0,
     'ember/no-capital-letters-in-routes': 0,
-    'ember/routes-segments-snake-case': 0
+    'ember/routes-segments-snake-case': 0,
+    'new-cap': 0,
+    'no-console': ['error', { allow: ['warn', 'error'] }],
+    'no-var': 'error'
   },
   overrides: [
     // node files

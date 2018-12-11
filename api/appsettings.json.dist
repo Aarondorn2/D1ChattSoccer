@@ -5,6 +5,11 @@
   "Secrets": {
     "JWT": "32 char string used for hashing"
   },
+  "Google": { // https://console.developers.google.com/apis/credentials (create => oath client id)
+    "ClientId": "clientId.apps.googleusercontent.com",
+    "ClientSecret": "client secret",
+    "AuthorizedRedirectUrl":  "must be in approved domain list" 
+  },
   "Logging": {
     "IncludeScopes": false,
     "LogLevel": {

@@ -1,22 +1,22 @@
-{{#bs-modal as |modal|}}
-  {{#modal.header onClose=dismiss}}
+{{#bs-modal
+  open=showModal
+  onHidden=onClose
+  as |modal|}}
+  {{#modal.header}}
     <h4>
       Login <small>select a login method</small>
     </h4>
   {{/modal.header}}
   {{#modal.body}}
     <div class="text-center login-icons">
-      <a href="#" title="Sign in with Facebook" {{action "signIn" "facebook"}}>
-        {{fa-icon "facebook"}}
+      <a href="#" title="Sign in with Facebook" {{action logIn "facebook-connect"}}>
+        {{fa-icon "facebook" size=2}}
       </a>
-      <a href="#" title="Sign in with Twitter" {{action "signIn" "twitter"}}>
-        {{fa-icon "twitter"}}
+      <a href="#" title="Sign in with Google" {{action logIn "google-oauth2"}}>
+        {{fa-icon "google" size=2}}
       </a>
-      <a href="#" title="Sign in with Google" {{action "signIn" "google"}}>
-        {{fa-icon "google"}}
-      </a>
-      <a href="#" title="Sign in with an Email and Password" {{action "showEmail"}}>
-        {{fa-icon "envelope"}}
+      <a href="#" title="Sign in with an Email and Password">
+        {{fa-icon "envelope" size=2}}
       </a>
     </div>
 {{!-- 

@@ -8,7 +8,22 @@ module.exports = function(environment) {
     locationType: 'auto',
 
     googleMap: {
-      apiKey: 'AIzaSyAA7J1woMp5Kn6ZMvg0fyJVIjq42v-0fTI'
+      apiKey: 'AIzaSyC1Qw5PPqCtX4RDpR_421YbemowNju73u0'
+    },
+    
+    torii: {
+      sessionServiceName: 'session',
+      providers: {
+        'facebook-connect': {
+          appId: '1946494598986774',
+          scope: 'email'
+        },
+        'google-oauth2': {
+          apiKey: '647564758213-ht32t2ma1rvn0apgi8qhe4124cnpg1rq.apps.googleusercontent.com',
+          redirectUri: 'http://localhost:4200/torii/redirect.html',
+          scope: 'email'
+        }
+      }
     },
 
     contentSecurityPolicy: {
@@ -43,6 +58,10 @@ module.exports = function(environment) {
     // ENV.APP.LOG_TRANSITIONS = true;
     // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
     // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.API = {
+      host: 'http://localhost:53304',
+      namespace: '/api'
+    };
   }
 
   if (environment === 'test') {

@@ -8,56 +8,57 @@
     <div class="pull-right">
       <a title="D1 Training - Chattanooga" href="https://d1training.com/chattanooga/" rel="noopener" target="_blank">
         D1 Training
-        <i class="fa fa-external-link">&zwnj;</i>
+        {{fa-icon "external-link"}}
       </a>
     </div>
   </div>
 
   <nav class="navbar navbar-expand-md">
     <button class="navbar-toggler ml-auto" type="button" {{action "toggleShowMenu"}}>
-      <i class="fa fa-bars fa-2x">&zwnj;</i>
+      {{fa-icon "bars" size=2}}
     </button>
 
-    <div class="collapse navbar-collapse {{if showMenu 'show'}}" id="menu">
-      <ul class="nav navbar-nav ml-auto" {{action "toggleShowMenu" false}}>
-        {{#link-to 'about' tagName="li"}}
+    <div class="collapse navbar-collapse {{if showMenu "show"}}" id="menu">
+      <ul class="nav navbar-nav ml-auto" {{action (mut showMenu) false}}>
+        {{#link-to "about" tagName="li"}}
             <a class="nav-link" href="#" target="_top">About</a>
         {{/link-to}}
-        {{#link-to 'contact' tagName="li"}}
+        {{#link-to "contact" tagName="li"}}
             <a class="nav-link" href="#" target="_top">Contact</a>
         {{/link-to}}
-        {{#link-to 'photos' tagName="li"}}
+        {{#link-to "photos" tagName="li"}}
             <a class="nav-link" href="#" target="_top">Photos</a>
         {{/link-to}}
-        {{#link-to 'rules' tagName="li"}}
+        {{#link-to "rules" tagName="li"}}
             <a class="nav-link" href="#" target="_top">League Rules</a>
         {{/link-to}}
-        {{#link-to 'standings' tagName="li"}}
+        {{#link-to "standings" tagName="li"}}
             <a class="nav-link" href="#" target="_top">Standings</a>
         {{/link-to}}
-        {{#link-to 'schedule' tagName="li"}}
+        {{#link-to "schedule" tagName="li"}}
             <a class="nav-link" href="#" target="_top">Schedule</a>
         {{/link-to}}
         
-        <input type="button" class="btn btn-login oswald upper" value="Sign Up / Log In" {{action "toggleShowLogin"}}>
         
-        {{!-- {{#if session.isAuthenticated}}
-          {{#link-to 'secure.dashboard' tagName="li"}}
-              <a class="nav-link" href="/secure/dashboard" target="_top">Dashboard</a>
+        {{#if session.isAuthenticated}}
+          {{#link-to "schedule" tagName="span"}}
+              <input type="button" class="btn btn-login oswald upper" value="Register">
           {{/link-to}}
-        {{/if}} --}}
+          <input type="button" class="btn btn-login oswald upper" value="Log Out" {{action "logOut"}}>
+        {{else}}
+          <input type="button" class="btn btn-login oswald upper" value="Sign Up / Log In" {{action (mut showLoginModal) true}}>
+        {{/if}}
       </ul>
     </div>
   </nav>
 </header>
 
-{{#unless session.isAuthenticated}}
-  {{#if showLogin}}
-    {{auth/login-modal class="login-modal" dismiss=(action "toggleShowLogin")}}
-  {{/if}}
-{{/unless}}
+{{auth/login-modal 
+  showModal=showLoginModal onClose=(action (mut showLoginModal) false)
+  class="login-modal" logIn=(action "logIn")}}
 
 {{outlet}}
+{{ember-notify messageStyle="bootstrap"}}
 
 <div class="footer footer-legal shadow-top nowrap">
   © 2018 D1 Sports Franchise, LLC. D1 is a registered trademark of D1 Sports Parent, LLC.

@@ -5,12 +5,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 using D1SoccerApi.Entities;
+using D1SoccerApi.Modules;
 
 namespace D1SoccerApi {
     public static class Security {
-        private const string issuer = "D1ChattSoccer.com";
-        private const string audience = "D1ChattSoccer.com";
-        private const string authHeaderType = "Bearer ";
+        const string issuer = "D1ChattSoccer.com";
+        const string audience = "D1ChattSoccer.com";
+        const string authHeaderType = "Bearer ";
 
         public static string GenerateJWT(JwtIdentity identity, string jwtSecret) {
             if (identity == null || string.IsNullOrWhiteSpace(identity.Email)) { return null; }
@@ -21,16 +22,11 @@ namespace D1SoccerApi {
                 new Claim("id", identity.Id),
                 new Claim("user", identity.Email),
                 new Claim("fname", identity.FirstName),
-                new Claim("utype", ((int)identity.UserType).ToString())
+                new Claim("utype", ((int)identity.UserType).ToString()),
+	            new Claim("prov", ((int)identity.Provider).ToString())
             };
             
-            var token = new JwtSecurityToken(
-                issuer,
-                audience,
-                claims,
-                expires: DateTime.Now.AddDays(1),
-                signingCredentials: creds
-            );
+            var token = new JwtSecurityToken(issuer, audience, claims, expires: DateTime.UtcNow.AddMonths(1), signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
@@ -45,7 +41,8 @@ namespace D1SoccerApi {
                 if (!tokenHandler.CanReadToken(jwtToken)) { return null; }
 
                 try {
-                    var claims = tokenHandler.ValidateToken(jwtToken,
+                    var claims = tokenHandler.ValidateToken(
+	                    jwtToken,
                         new TokenValidationParameters {
                             ValidateIssuer = true,
                             ValidateAudience = true,
@@ -55,10 +52,11 @@ namespace D1SoccerApi {
                             ValidAudience = audience,
                             IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSecret))
                         },
-                        out var _);
+                        out _);
 
-                    if (string.IsNullOrWhiteSpace(claims?.AsJwtIdentity()?.Email)) { return null; }
-                    return claims;
+                    return string.IsNullOrWhiteSpace(claims.AsJwtIdentity()?.Email)
+		                ? null
+		                : claims;
                 } catch {
                     return null;
                 }
@@ -67,21 +65,19 @@ namespace D1SoccerApi {
     }
 
     public class JwtIdentity : ClaimsPrincipal {
-        public JwtIdentity() : base() { }
-        public JwtIdentity(ClaimsPrincipal principal) : base(principal) {
+	    public JwtIdentity() { }
+	    public JwtIdentity(ClaimsPrincipal principal) : base(principal) {
             Id = FindFirst("id")?.Value;
             Email = FindFirst("user")?.Value;
             FirstName = FindFirst("fname")?.Value;
             UserType = int.TryParse(FindFirst("utype")?.Value, out var utype) ? (UserType)utype : UserType.Player;
-            IsRegistered = bool.TryParse(FindFirst("regd")?.Value, out var isRegistered) ? isRegistered : false;
-            IsVerified = bool.TryParse(FindFirst("vrfd")?.Value, out var isVerified) ? isVerified : false;
+		    Provider = int.TryParse(FindFirst("prov")?.Value, out var prov) ? (AuthModule.AuthProvider)prov : AuthModule.AuthProvider.Unspecified;
         }
 
         public string Id { get; set; }
         public string Email { get; set; }
         public string FirstName { get; set; }
         public UserType UserType { get; set; }
-        public bool IsRegistered { get; set; }
-        public bool IsVerified { get; set; }
+		public AuthModule.AuthProvider Provider { get; set; }
     }
 }

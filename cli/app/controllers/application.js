@@ -1,18 +1,30 @@
 import Controller from '@ember/controller';
 import { inject as service } from '@ember/service';
+import { UserType } from '../utils/enum';
 
 export default Controller.extend({
-  session: service(),
-  
+  notify: service(),
+
   showMenu: false,
-  showLogin: false,
+  showLoginModal: false,
+  UserType,
 
   actions: {
-    toggleShowMenu: function(value = null) {
-      this.set('showMenu', value != null ? value : !this.showMenu);
+    toggleShowMenu() {
+      this.toggle('showMenu');
     },
-    toggleShowLogin: function() {      
-      this.toggleProperty('showLogin');
+
+    logIn(provider) {
+      this.session.open(provider)
+        .then(() => {          
+          //this.transitionToRoute('secure.dashboard');
+        })
+        .catch(() => this.notify.error('Unable to log in. Please try again later.'))
+        .finally(() => this.set('showLoginModal', false));
+    },
+
+    logOut() {
+      this.session.close();
     }
   }
 });
