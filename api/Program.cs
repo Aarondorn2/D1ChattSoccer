@@ -7,15 +7,12 @@ namespace D1SoccerApi {
         public static IConfiguration Configuration { get; set; }
 
         public static void Main(string[] args) {
-            BuildWebHost(args).Run();
+	        CreateWebHostBuilder(args).Build().Run();
         }
 
-        public static IWebHost BuildWebHost(string[] args) {
-            return WebHost.CreateDefaultBuilder(args)
-                //.UseContentRoot(Directory.GetCurrentDirectory())
-                //.UseKestrel()
-                .UseStartup<Startup>()
-                .Build();
-        }
+	    public static IWebHostBuilder CreateWebHostBuilder(string[] args) {
+		    return WebHost.CreateDefaultBuilder(args)
+			    .UseStartup<Startup>();
+	    }
     }
 }
