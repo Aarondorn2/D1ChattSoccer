@@ -3,14 +3,16 @@ using System;
 using D1SoccerApi.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace D1SoccerApi.Migrations
 {
     [DbContext(typeof(D1SoccerApiContext))]
-    partial class D1SoccerApiContextModelSnapshot : ModelSnapshot
+    [Migration("20190105194516_Credentials")]
+    partial class Credentials
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

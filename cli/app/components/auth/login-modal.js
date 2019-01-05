@@ -4,11 +4,13 @@ export default Component.extend({
   email: "",
   resetEmail: "",
   password: "",
+  showEmail: false,
   isSendSuccess: false,
   errorMessage: "",
 
   actions: {
-    showEmail() {
+    toggleEmail() {
+      this.toggleProperty('showEmail');
     }
   }
 });

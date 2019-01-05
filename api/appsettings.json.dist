@@ -3,7 +3,8 @@
     "D1SoccerServiceContext": "your connection string"
   },
   "Secrets": {
-    "JWT": "32 char string used for hashing"
+    "JWT": "32 char (256 bits) string used for JWT hashing",
+    "Credentials": "24 char (192 bits) string used for peppering (encrypting) password hashes (bcrypt)" // https://en.wikipedia.org/wiki/Pepper_(cryptography), https://archive.codeplex.com/?p=bcrypt
   },
   "Google": { // https://console.developers.google.com/apis/credentials (create => oath client id)
     "ClientId": "clientId.apps.googleusercontent.com",

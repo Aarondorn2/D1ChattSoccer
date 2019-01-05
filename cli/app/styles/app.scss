@@ -19,7 +19,6 @@ $header-split: 1280px; //header is now 2 rows
 @import "ember-photoswipe";
 @import 'index';
 @import 'header-footer';
-@import 'login';
 @import 'components/contact-card';
 @import 'components/rules';
 @import 'components/auth/login-modal';
@@ -144,8 +143,8 @@ h6, .h6 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-.top-5 {
-  padding-top: 5px;
+.text-red {
+  color: $d1-red;
 }
 
 //?

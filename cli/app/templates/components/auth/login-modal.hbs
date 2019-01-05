@@ -15,28 +15,30 @@
       <a href="#" title="Sign in with Google" {{action logIn "google-oauth2"}}>
         {{fa-icon "google" size=2}}
       </a>
-      <a href="#" title="Sign in with an Email and Password">
+      <a href="#" title="Sign in with an Email and Password" {{action "toggleEmail"}}>
         {{fa-icon "envelope" size=2}}
       </a>
     </div>
-{{!-- 
     <hr>
-
-    <div id="login-email" class="login-email hide">
-
-      <div class="input-group">
-        <span class="input-group-addon">{{fa-icon "user" fixedWidth=true}}</span>
+    {{#if showEmail}}
+      <br>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text text-red">
+            {{fa-icon "user" fixedWidth=true}}
+          </span>
+        </div>
         {{input type="text" value=email placeholder="Email" class="form-control" insert-newline="submitLogin"}}
       </div>
-      <div class="input-group">
-        <span class="input-group-addon">{{fa-icon "lock" fixedWidth=true}}</span>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text text-red">
+            {{fa-icon "lock" fixedWidth=true}}
+          </span>
+        </div>
         {{input type="password" value=password placeholder="Password" class="form-control" insert-newline="submitLogin"}}
       </div>
-      <a {{action "showResetPassword"}} href="#" style="font-size: .8em;">Forgot Password?</a>
-      <br>
-
-
-      <br>
+      {{!-- <a {{action "showResetPassword"}} href="#" style="font-size: .8em;">Forgot Password?</a> --}}
       {{#if errorMessage}}
         <div class="login-error">
           {{errorMessage}}
@@ -50,14 +52,15 @@
         <div class="clearfix" />
       {{/if}}
 
-      <a {{action "routeToRegister"}} class="btn login-btn pull-left" ><button class="btn" data-dismiss="modal">Register</button></a>
+      <div class="text-center">
+        <button class="btn btn-default text-red" {{action logIn "email" email password}}>
+          <strong>Login</strong>
+        </button>
+        {{!-- <a {{action "routeToRegister"}} class="btn login-btn pull-left" ><button class="btn" data-dismiss="modal">Register</button></a> --}}
+      </div>
+    {{/if}}
 
-      <a {{action "signIn" "password"}} class="btn login-btn pull-right" ><button class="btn" id="login-button">Login</button></a>
-      <div class="clearfix" />
-
-    </div>
-
-    <div id="reset-password" class="reset-password hide">
+    {{!-- <div id="reset-password" class="reset-password hide">
 
         {{#alert-message display=isPasswordResetFirstAttempt type='info'}}
           Enter your email address and we'll send a reset link.

@@ -2,7 +2,7 @@
   {{#photo-swipe items=model history=false as |photoswipe|}}
     <div class="row">
       {{#each model as |item index|}}
-        <div class="col-12 top-5">          
+        <div class="col-12 pt-2">          
           <img class="img-fluid" src={{item.src}} {{action photoswipe.actions.open (hash index=index)}} />
         </div>
       {{/each}}

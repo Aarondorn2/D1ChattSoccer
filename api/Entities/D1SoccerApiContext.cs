@@ -17,6 +17,8 @@ namespace D1SoccerApi.Entities {
         }
         
         public virtual DbSet<Contract> Contracts { get; set; }
+	    public virtual DbSet<Credential> Credentials { get; set; }
+	    public virtual DbSet<FailedLogin> FailedLogins { get; set; }
         public virtual DbSet<ManualUserSeason> ManualUserSeasons { get; set; }
         public virtual DbSet<Season> Seasons { get; set; }
         public virtual DbSet<Team> Teams { get; set; }
@@ -24,8 +26,10 @@ namespace D1SoccerApi.Entities {
         public virtual DbSet<UserInfo> UserInfos { get; set; }
         public virtual DbSet<UserSeason> UserSeasons { get; set; }
         public virtual DbSet<Waiver> Waivers { get; set; }
-        
-        protected override void OnModelCreating(ModelBuilder modelBuilder) { }
+
+	    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+		    modelBuilder.Entity<User>().HasIndex(x => x.Email).IsUnique();
+	    }
     }
 
     public class D1SoccerApiContextFactory : IDesignTimeDbContextFactory<D1SoccerApiContext> {

@@ -11,13 +11,17 @@ export default Controller.extend({
 
   actions: {
     toggleShowMenu() {
-      this.toggle('showMenu');
+      this.toggleProperty('showMenu');
     },
 
-    logIn(provider) {
-      this.session.open(provider)
+    logIn(provider, email, pass) {
+      let options = email && pass 
+        ? { email, pass }
+        : null;
+
+      this.session.open(provider, options)
         .then(() => {          
-          //this.transitionToRoute('secure.dashboard');
+          //this.transitionToRoute('secure.register');
         })
         .catch(() => this.notify.error('Unable to log in. Please try again later.'))
         .finally(() => this.set('showLoginModal', false));

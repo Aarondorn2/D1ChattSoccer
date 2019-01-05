@@ -1,3 +1,4 @@
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.Extensions.Configuration;
 using Nancy;
@@ -7,12 +8,40 @@ using System.Text;
 using D1SoccerApi.Entities;
 using Nancy.ModelBinding;
 using Newtonsoft.Json;
+using Z.EntityFramework.Plus;
 
 namespace D1SoccerApi.Modules {
     public class AuthModule : NancyModule {
-        readonly IConfiguration Configuration;
         public AuthModule(D1SoccerApiContext ctx, IConfiguration config) : base("api") {
-            Configuration = config;
+			Post("auth/email", _ => {
+				EmailAuth auth = this.Bind();
+				var tenMinutesAgo = DateTime.UtcNow.AddMinutes(-10);
+
+				if (!Validate.IsValidEmail(auth.Email) || !Validate.IsValidPassword(auth.Password)) {
+					return HttpStatusCode.BadRequest;
+				}
+
+				if (ctx.FailedLogins.Count(y => y.Email == auth.Email && y.Attempt > tenMinutesAgo) >= 10) {
+					return HttpStatusCode.TooManyRequests;
+				}
+			
+				if (Security.Credential.IsValid(auth.Email, auth.Password, config["Secrets:Credentials"], ctx)) {
+					ctx.Credentials.Where(x => x.Email == auth.Email)
+						.Update(x => new Credential {
+							LastLogin = DateTime.UtcNow
+						});
+
+					return GetToken(auth.Email, AuthProvider.EmailUnverified, config["Secrets:JWT"], ctx);
+				}
+
+				ctx.FailedLogins.Add(new FailedLogin {
+					Email = auth.Email,
+					Attempt = DateTime.UtcNow
+				});
+				ctx.SaveChanges();
+
+				return HttpStatusCode.BadRequest;
+			});
 			
 	        Post("auth/facebook-connect", async (_, __) => {
 				FbAuth auth = this.Bind();
@@ -24,7 +53,7 @@ namespace D1SoccerApi.Modules {
 					var email = JsonConvert.DeserializeAnonymousType(await resp.Content.ReadAsStringAsync(), new { Email = "" })?.Email;
 					if (email == null) { return HttpStatusCode.BadRequest; }
 
-					return GetToken(email, AuthProvider.Facebook, ctx);
+					return GetToken(email, AuthProvider.Facebook, config["Secrets:JWT"], ctx);
 				}
 			});
 			
@@ -34,9 +63,9 @@ namespace D1SoccerApi.Modules {
 		        using (var client = new HttpClient()) {
 					var content = JsonConvert.SerializeObject(new {
 						code = auth.AuthorizationCode,
-						client_id = Configuration["Google:ClientId"],
-						client_secret = Configuration["Google:ClientSecret"],
-						redirect_uri = Configuration["Google:AuthorizedRedirectUrl"],
+						client_id = config["Google:ClientId"],
+						client_secret = config["Google:ClientSecret"],
+						redirect_uri = config["Google:AuthorizedRedirectUrl"],
 						grant_type = "authorization_code"
 					});
 
@@ -49,24 +78,34 @@ namespace D1SoccerApi.Modules {
 			        var email = new JwtSecurityTokenHandler().ReadJwtToken(jwt).Claims.First(x => x.Type == "email").Value;
 			        if (email == null) { return HttpStatusCode.BadRequest; }
 					
-			        return GetToken(email, AuthProvider.Google, ctx);
+			        return GetToken(email, AuthProvider.Google, config["Secrets:JWT"], ctx);
 		        }
 	        });
         }
 
-        string GetToken(string email, AuthProvider provider, D1SoccerApiContext ctx) {	
-            var identity = ctx.Users
+        string GetToken(string email, AuthProvider provider, string jwtSecret, D1SoccerApiContext ctx) {	
+            var user = ctx.Users
             .Where(x => x.Email == email)
-            .Select(x => new JwtIdentity {
-                Email = x.Email,
-                Id = x.Id.ToString(),
-                FirstName = x.FirstName,
-                UserType = x.UserType,
-				Provider = provider
+            .Select(x => new {
+                x.Id,
+                x.Email,
+                x.FirstName,
+                x.UserType,
+				x.IsEmailVerified
             })
-	        .FirstOrDefault() ?? new JwtIdentity { Email = email, Provider = provider };
+	        .FirstOrDefault();
 
-            return Security.GenerateJWT(identity, Configuration["Secrets:JWT"]);
+            return Security.GenerateJWT(
+	            new JwtIdentity {
+		            Email = email,
+		            Id = user?.Id.ToString(),
+		            FirstName = user?.FirstName,
+		            UserType = user?.UserType ?? UserType.Player,
+		            Provider = provider == AuthProvider.EmailUnverified && user?.IsEmailVerified == true
+			            ? AuthProvider.EmailVerified
+			            : provider
+	            },
+	            jwtSecret);
         }
 
 	    public enum AuthProvider {
@@ -91,6 +130,11 @@ namespace D1SoccerApi.Modules {
 		    public static readonly string TokenUrl = $"{Url}/v4/token";
 
 		    public string AuthorizationCode { get; set; }
+	    }
+
+	    class EmailAuth {
+			public string Email { get; set; }
+		    public string Password { get; set; }
 	    }
     }
 }
